@@ -35,7 +35,9 @@ def seed_patients(conn: sqlite3.Connection) -> None:
         ("Eva", "Martinez", "2000-06-05", "F"),
     ]
     conn.executemany(
-        "INSERT INTO patients (first_name, last_name, date_of_birth, sex) VALUES (?, ?, ?, ?)",
+        """INSERT INTO patients
+           (first_name, last_name, date_of_birth, sex)
+           VALUES (?, ?, ?, ?)""",
         patients,
     )
     conn.commit()
