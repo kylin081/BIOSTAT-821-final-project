@@ -93,6 +93,18 @@ pytest --cov=clinical --cov-report=term-missing
 
 ---
 
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration. The CI pipeline runs automatically on every push and pull request to the `main` and `develop` branches.
+
+The CI pipeline includes:
+- **Linting**: Code style checks with Ruff
+- **Testing**: Full test suite with pytest and coverage reporting
+
+You can see the current CI status in the [Actions tab](https://github.com/kylin081/clinical-data-system/actions) of the repository.
+
+---
+
 ## Code Style
 
 This project uses [Ruff](https://docs.astral.sh/ruff/) for linting and formatting.

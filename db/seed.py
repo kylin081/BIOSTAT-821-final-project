@@ -35,7 +35,9 @@ def seed_patients(conn: sqlite3.Connection) -> None:
         ("Eva", "Martinez", "2000-06-05", "F"),
     ]
     conn.executemany(
-        "INSERT INTO patients (first_name, last_name, date_of_birth, sex) VALUES (?, ?, ?, ?)",
+        """INSERT INTO patients
+           (first_name, last_name, date_of_birth, sex)
+           VALUES (?, ?, ?, ?)""",
         patients,
     )
     conn.commit()
@@ -44,7 +46,7 @@ def seed_patients(conn: sqlite3.Connection) -> None:
 def seed_lab_results(conn: sqlite3.Connection) -> None:
     """Insert sample lab results, including some abnormal values."""
     lab_results = [
-        # (patient_id, lab_name, value, unit, recorded_at)
+        # (patient_id, lab_name, value, unit, collected_at)
         # Alice — normal
         (1, "glucose", 95.0, "mg/dL", "2026-01-10 08:30:00"),
         (1, "hemoglobin", 13.5, "g/dL", "2026-01-10 08:30:00"),
@@ -65,7 +67,7 @@ def seed_lab_results(conn: sqlite3.Connection) -> None:
     ]
     conn.executemany(
         """INSERT INTO lab_results
-           (patient_id, lab_name, value, unit, recorded_at)
+           (patient_id, lab_name, value, unit, collected_at)
            VALUES (?, ?, ?, ?, ?)""",
         lab_results,
     )

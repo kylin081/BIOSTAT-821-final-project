@@ -21,6 +21,6 @@ CREATE TABLE lab_results (
     lab_name     TEXT    NOT NULL,  -- e.g. 'glucose', 'hemoglobin'
     value        REAL    NOT NULL,
     unit         TEXT    NOT NULL,  -- e.g. 'mg/dL', 'g/dL'
-    recorded_at  TEXT    NOT NULL,  -- format: YYYY-MM-DD HH:MM:SS
+    collected_at  TEXT    NOT NULL,  -- format: YYYY-MM-DD HH:MM:SS
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
 );

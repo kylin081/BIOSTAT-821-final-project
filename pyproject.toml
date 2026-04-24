@@ -17,6 +17,9 @@ dev = [
     "ruff>=0.4.0",
 ]
 
+[tool.setuptools]
+packages = ["api", "clinical", "db"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py311"
