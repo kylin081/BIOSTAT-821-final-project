@@ -126,6 +126,16 @@ ruff format .
 
 ---
 
+## Generative AI Usage
+ 
+This project used generative AI tools during development. All usage is documented below:
+ 
+| Tool | How it was used | What it produced |
+|------|----------------|-----------------|
+| Claude | Help us refine the overall project structure and assist in revising the codes | README.md, issue descriptions, test reviews |
+ 
+---
+
 ## License
 
 MIT
