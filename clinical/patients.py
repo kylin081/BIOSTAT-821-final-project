@@ -9,6 +9,7 @@ It does not depend on the API layer.
 import sqlite3
 from datetime import date
 from pathlib import Path
+from typing import Optional
 
 DB_PATH = Path(__file__).parent.parent / "clinical.db"
 
@@ -42,7 +43,7 @@ def calculate_age(date_of_birth: str) -> int:
     return age
 
 
-def get_patient_by_id(patient_id: int) -> dict | None:
+def get_patient_by_id(patient_id: int) -> Optional[dict]:
     """Retrieve a single patient by their ID.
 
     Args:

@@ -33,6 +33,7 @@ app = FastAPI(
 # GET /patients/{id}
 # ---------------------------------------------------------------------------
 
+
 @app.get(
     "/patients/{patient_id}",
     summary="Get patient by ID",
@@ -57,6 +58,7 @@ def read_patient(patient_id: int) -> JSONResponse:
 # ---------------------------------------------------------------------------
 # GET /patients/{id}/labs
 # ---------------------------------------------------------------------------
+
 
 @app.get(
     "/patients/{patient_id}/labs",
@@ -86,6 +88,7 @@ def read_patient_labs(patient_id: int) -> JSONResponse:
 # ---------------------------------------------------------------------------
 # GET /labs/abnormal
 # ---------------------------------------------------------------------------
+
 
 @app.get(
     "/labs/abnormal",

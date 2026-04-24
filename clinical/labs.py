@@ -45,9 +45,11 @@ def get_connection() -> sqlite3.Connection:
 # 1.  Reference-range catalogue  (pure data, no I/O)
 # ---------------------------------------------------------------------------
 
+
 @dataclass(frozen=True)
 class ReferenceRange:
     """Inclusive [low, high] normal range for a lab test."""
+
     low: float
     high: float
     unit: str = ""
@@ -57,61 +59,61 @@ class ReferenceRange:
 # Keys are normalised: lowercase + stripped.
 NORMAL_RANGES: dict[str, ReferenceRange] = {
     # Metabolic / basic panel
-    "glucose":    ReferenceRange(70.0, 99.0, "mg/dL", "Fasting blood glucose"),
-    "bun":        ReferenceRange(7.0, 20.0, "mg/dL", "Blood urea nitrogen"),
+    "glucose": ReferenceRange(70.0, 99.0, "mg/dL", "Fasting blood glucose"),
+    "bun": ReferenceRange(7.0, 20.0, "mg/dL", "Blood urea nitrogen"),
     "creatinine": ReferenceRange(0.6, 1.2, "mg/dL", "Serum creatinine"),
-    "sodium":     ReferenceRange(136.0, 145.0, "mEq/L", "Serum sodium"),
-    "potassium":  ReferenceRange(3.5, 5.0, "mEq/L", "Serum potassium"),
-    "chloride":   ReferenceRange(98.0, 107.0, "mEq/L", "Serum chloride"),
-    "co2":        ReferenceRange(22.0, 29.0, "mEq/L", "Carbon dioxide / bicarbonate"),
-    "calcium":    ReferenceRange(8.5, 10.5, "mg/dL", "Serum calcium"),
-    "magnesium":  ReferenceRange(1.7, 2.2, "mg/dL", "Serum magnesium"),
+    "sodium": ReferenceRange(136.0, 145.0, "mEq/L", "Serum sodium"),
+    "potassium": ReferenceRange(3.5, 5.0, "mEq/L", "Serum potassium"),
+    "chloride": ReferenceRange(98.0, 107.0, "mEq/L", "Serum chloride"),
+    "co2": ReferenceRange(22.0, 29.0, "mEq/L", "Carbon dioxide / bicarbonate"),
+    "calcium": ReferenceRange(8.5, 10.5, "mg/dL", "Serum calcium"),
+    "magnesium": ReferenceRange(1.7, 2.2, "mg/dL", "Serum magnesium"),
     "phosphorus": ReferenceRange(2.5, 4.5, "mg/dL", "Serum phosphorus"),
     # Liver function
-    "alt":           ReferenceRange(7.0, 56.0, "U/L", "Alanine aminotransferase"),
-    "ast":           ReferenceRange(10.0, 40.0, "U/L", "Aspartate aminotransferase"),
-    "alp":           ReferenceRange(44.0, 147.0, "U/L", "Alkaline phosphatase"),
-    "bilirubin":     ReferenceRange(0.1, 1.2, "mg/dL", "Total bilirubin"),
-    "albumin":       ReferenceRange(3.4, 5.4, "g/dL", "Serum albumin"),
+    "alt": ReferenceRange(7.0, 56.0, "U/L", "Alanine aminotransferase"),
+    "ast": ReferenceRange(10.0, 40.0, "U/L", "Aspartate aminotransferase"),
+    "alp": ReferenceRange(44.0, 147.0, "U/L", "Alkaline phosphatase"),
+    "bilirubin": ReferenceRange(0.1, 1.2, "mg/dL", "Total bilirubin"),
+    "albumin": ReferenceRange(3.4, 5.4, "g/dL", "Serum albumin"),
     "total protein": ReferenceRange(6.0, 8.3, "g/dL", "Total serum protein"),
     # Complete blood count
-    "hemoglobin":  ReferenceRange(12.0, 17.5, "g/dL", "Hemoglobin"),
-    "hematocrit":  ReferenceRange(36.0, 50.0, "%", "Hematocrit"),
-    "wbc":         ReferenceRange(4.5, 11.0, "10^3/uL", "White blood cell count"),
-    "rbc":         ReferenceRange(4.2, 5.9, "10^6/uL", "Red blood cell count"),
-    "platelets":   ReferenceRange(150.0, 400.0, "10^3/uL", "Platelet count"),
-    "mcv":         ReferenceRange(80.0, 100.0, "fL", "Mean corpuscular volume"),
-    "mch":         ReferenceRange(27.0, 33.0, "pg", "Mean corpuscular haemoglobin"),
-    "mchc":        ReferenceRange(32.0, 36.0, "g/dL", "MCH concentration"),
-    "rdw":         ReferenceRange(11.5, 14.5, "%", "Red cell distribution width"),
+    "hemoglobin": ReferenceRange(12.0, 17.5, "g/dL", "Hemoglobin"),
+    "hematocrit": ReferenceRange(36.0, 50.0, "%", "Hematocrit"),
+    "wbc": ReferenceRange(4.5, 11.0, "10^3/uL", "White blood cell count"),
+    "rbc": ReferenceRange(4.2, 5.9, "10^6/uL", "Red blood cell count"),
+    "platelets": ReferenceRange(150.0, 400.0, "10^3/uL", "Platelet count"),
+    "mcv": ReferenceRange(80.0, 100.0, "fL", "Mean corpuscular volume"),
+    "mch": ReferenceRange(27.0, 33.0, "pg", "Mean corpuscular haemoglobin"),
+    "mchc": ReferenceRange(32.0, 36.0, "g/dL", "MCH concentration"),
+    "rdw": ReferenceRange(11.5, 14.5, "%", "Red cell distribution width"),
     "neutrophils": ReferenceRange(1.8, 7.7, "10^3/uL", "Absolute neutrophil count"),
     "lymphocytes": ReferenceRange(1.0, 4.8, "10^3/uL", "Absolute lymphocyte count"),
     # Lipid panel
     "total cholesterol": ReferenceRange(0.0, 199.0, "mg/dL", "Total cholesterol"),
-    "ldl":               ReferenceRange(0.0, 99.0, "mg/dL", "LDL cholesterol"),
-    "hdl":               ReferenceRange(40.0, 9999.0, "mg/dL", "HDL cholesterol"),
-    "triglycerides":     ReferenceRange(0.0, 149.0, "mg/dL", "Triglycerides"),
+    "ldl": ReferenceRange(0.0, 99.0, "mg/dL", "LDL cholesterol"),
+    "hdl": ReferenceRange(40.0, 9999.0, "mg/dL", "HDL cholesterol"),
+    "triglycerides": ReferenceRange(0.0, 149.0, "mg/dL", "Triglycerides"),
     # Thyroid
     "tsh": ReferenceRange(0.4, 4.0, "mIU/L", "Thyroid-stimulating hormone"),
-    "t4":  ReferenceRange(5.0, 12.0, "ug/dL", "Total thyroxine"),
-    "t3":  ReferenceRange(80.0, 200.0, "ng/dL", "Total triiodothyronine"),
+    "t4": ReferenceRange(5.0, 12.0, "ug/dL", "Total thyroxine"),
+    "t3": ReferenceRange(80.0, 200.0, "ng/dL", "Total triiodothyronine"),
     # Coagulation
-    "pt":  ReferenceRange(11.0, 13.5, "seconds", "Prothrombin time"),
+    "pt": ReferenceRange(11.0, 13.5, "seconds", "Prothrombin time"),
     "inr": ReferenceRange(0.8, 1.1, "", "International normalised ratio"),
     "ptt": ReferenceRange(25.0, 35.0, "seconds", "Partial thromboplastin time"),
     # Hormones / miscellaneous
-    "hba1c":              ReferenceRange(0.0, 5.6, "%", "Glycated haemoglobin"),
-    "ferritin":           ReferenceRange(12.0, 300.0, "ng/mL", "Serum ferritin"),
-    "iron":               ReferenceRange(60.0, 170.0, "ug/dL", "Serum iron"),
-    "uric acid":          ReferenceRange(2.4, 7.0, "mg/dL", "Uric acid"),
+    "hba1c": ReferenceRange(0.0, 5.6, "%", "Glycated haemoglobin"),
+    "ferritin": ReferenceRange(12.0, 300.0, "ng/mL", "Serum ferritin"),
+    "iron": ReferenceRange(60.0, 170.0, "ug/dL", "Serum iron"),
+    "uric acid": ReferenceRange(2.4, 7.0, "mg/dL", "Uric acid"),
     "c-reactive protein": ReferenceRange(0.0, 1.0, "mg/dL", "C-reactive protein"),
-    "esr":         ReferenceRange(0.0, 20.0, "mm/hr", "Erythrocyte sedimentation rate"),
-    "vitamin d":          ReferenceRange(20.0, 50.0, "ng/mL", "25-hydroxyvitamin D"),
-    "vitamin b12":        ReferenceRange(200.0, 900.0, "pg/mL", "Vitamin B12"),
-    "folate":             ReferenceRange(2.7, 17.0, "ng/mL", "Serum folate"),
-    "psa":         ReferenceRange(0.0, 4.0, "ng/mL", "Prostate-specific antigen"),
-    "amylase":            ReferenceRange(30.0, 110.0, "U/L", "Serum amylase"),
-    "lipase":             ReferenceRange(0.0, 160.0, "U/L", "Serum lipase"),
+    "esr": ReferenceRange(0.0, 20.0, "mm/hr", "Erythrocyte sedimentation rate"),
+    "vitamin d": ReferenceRange(20.0, 50.0, "ng/mL", "25-hydroxyvitamin D"),
+    "vitamin b12": ReferenceRange(200.0, 900.0, "pg/mL", "Vitamin B12"),
+    "folate": ReferenceRange(2.7, 17.0, "ng/mL", "Serum folate"),
+    "psa": ReferenceRange(0.0, 4.0, "ng/mL", "Prostate-specific antigen"),
+    "amylase": ReferenceRange(30.0, 110.0, "U/L", "Serum amylase"),
+    "lipase": ReferenceRange(0.0, 160.0, "U/L", "Serum lipase"),
 }
 
 
@@ -131,6 +133,7 @@ def get_reference_range(lab_name: str) -> ReferenceRange | None:
 # ---------------------------------------------------------------------------
 # 2.  Pure-logic helper  (no I/O)
 # ---------------------------------------------------------------------------
+
 
 def is_abnormal(lab_name: str, value: float) -> bool:
     """Return True if *value* falls outside the normal range for *lab_name*.
@@ -168,13 +171,14 @@ def _annotate(row: sqlite3.Row) -> dict:
     if ref is not None:
         result["abnormal"] = is_abnormal(result["lab_name"], result["value"])
     else:
-        result["abnormal"] = None   # lab not in catalogue
+        result["abnormal"] = None  # lab not in catalogue
     return result
 
 
 # ---------------------------------------------------------------------------
 # 3.  Database-backed query functions  (mirror patients.py style)
 # ---------------------------------------------------------------------------
+
 
 def get_patient_labs(patient_id: int) -> list[dict]:
     """Retrieve all lab results for a patient, ordered by collection time.
